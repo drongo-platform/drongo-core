@@ -24,7 +24,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
-        'six==1.11.0'
+        'six'
     ],
     zip_safe=True,
     entry_points={'console_scripts': [
