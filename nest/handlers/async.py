@@ -190,6 +190,7 @@ class AsyncHandler(object):
 
     def shutdown(self):
         self.loop.create_task(self.async_shutdown())
+        time.sleep(5)
         self.running = False
 
     def wait(self):
