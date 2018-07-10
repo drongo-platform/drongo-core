@@ -1,8 +1,4 @@
 language: python
-services:
-  - mongodb
-before_script:
-  - sleep 15
 python:
   - "2.7"
   - "3.3"
