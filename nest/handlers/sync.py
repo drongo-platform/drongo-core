@@ -57,8 +57,7 @@ class Responder(object):
     def respond(self, env):
         res = self.app(env, self.start_response)
         for data in res:
-            res = self.sock.sendall(data)
-        res = self.sock.sendall(b'')
+            self.sock.sendall(data)
 
 
 class SyncHandler(object):
