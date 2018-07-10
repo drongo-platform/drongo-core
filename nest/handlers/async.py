@@ -167,12 +167,6 @@ class AsyncHandler(object):
             except BrokenPipeError:
                 break  # Ignore the broken pipe error
 
-    @asyncio.coroutine
-    def keep_running(self):
-        self.running = True
-        while self.running:
-            yield from asyncio.sleep(5)
-
     def run(self):
         print('Listening on', self.nest.addr, '...')
 
@@ -180,18 +174,20 @@ class AsyncHandler(object):
         server_coro = asyncio.start_server(
             self.accept, sock=self.sock, backlog=1000, loop=self.loop)
         self.server = self.loop.run_until_complete(server_coro)
-        self.loop.run_until_complete(self.keep_running())
+        self.loop.run_forever()
 
     @asyncio.coroutine
     def async_shutdown(self):
         self.server.close()
+        yield from self.server.wait_closed()
         for task, (r, w) in self._clients.items():
             w.close()
+        self.loop.stop()
 
     def shutdown(self):
         self.loop.create_task(self.async_shutdown())
         time.sleep(5)
-        self.running = False
+        self.loop.close()
 
     def wait(self):
         pass
