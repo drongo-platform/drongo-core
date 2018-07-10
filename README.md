@@ -1,0 +1,1 @@
+# drongo-core [![Build Status](https://api.travis-ci.org/drongo-platform/drongo-core.svg?branch=master)](https://travis-ci.org/drongo-platform/drongo-core) [![codecov](https://codecov.io/gh/drongo-platform/drongo-core/branch/master/graph/badge.svg)](https://codecov.io/gh/drongo-platform/drongo-core)
