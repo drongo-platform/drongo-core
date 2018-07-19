@@ -28,10 +28,9 @@ class BasicDrongoTest(unittest.TestCase):
             PATH_INFO='/'
         )
 
+        @self.app.url('/', 'GET')
         def sample(ctx):
             return 'Hello, World!'
-
-        self.app.add_url('/', 'GET', sample)
 
         self.app(sample_env, self.start_response)
         self.assertIn('200', self.status_code)
