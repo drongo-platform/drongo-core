@@ -1,6 +1,7 @@
 import unittest
 
 from drongo import Drongo
+from drongo.exceptions import SkipExecException
 
 
 class BasicDrongoTest(unittest.TestCase):
@@ -144,6 +145,28 @@ class BasicDrongoTest(unittest.TestCase):
 
         self.app(sample_env, self.start_response)
         self.assertTrue(self.exception_called)
+
+    def test_middleware_skip(self):
+        class Middleware(object):
+            def before(self, ctx):
+                raise SkipExecException
+
+        self.app.middlewares.add(Middleware())
+
+        def sample(ctx):
+            self.method_called = True
+
+        self.app.add_url('/', 'GET', sample)
+
+        sample_env = dict(
+            REQUEST_METHOD='GET',
+            GET='',
+            PATH_INFO='/'
+        )
+
+        self.method_called = False
+        self.app(sample_env, self.start_response)
+        self.assertFalse(self.method_called)
 
     def test_arg(self):
         sample_env = dict(
