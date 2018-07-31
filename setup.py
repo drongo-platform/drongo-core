@@ -28,5 +28,6 @@ setup(
     ],
     zip_safe=True,
     entry_points={'console_scripts': [
+        'drongo-nest = nest.cmd:main'
     ]},
 )
