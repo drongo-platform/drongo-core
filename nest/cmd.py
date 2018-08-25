@@ -14,11 +14,21 @@ def _parse():
     parser.add_argument('--port', default=8000, type=int)
     parser.add_argument('--auto-reload', action='store_true')
     parser.add_argument('--async', action='store_true')
+    parser.add_argument('--debug', action='store_true')
     return parser.parse_args()
 
 
 def main():
     options = _parse()
+
+    if options.debug:
+        import logging
+        fmt = (
+            '\033[36m%(asctime)-24s \033[34m%(name)-16s '
+            '\033[32m%(levelname)-8s \033[97m%(message)s\033[39m'
+        )
+        logging.basicConfig(format=fmt, level=logging.INFO)
+
     module, app = options.app.split(':')
     module = importlib.import_module(module)
     app = getattr(module, app)
