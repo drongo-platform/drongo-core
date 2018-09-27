@@ -22,7 +22,7 @@ class Nest(object):
         self.app = settings.get('app')
 
         # Use asynio by default for Python 3.4 and above
-        self.async = settings.get('async', (sys.version_info[:2] >= (3, 4)))
+        self.asyncio = settings.get('async', (sys.version_info[:2] >= (3, 4)))
 
         # Do not use this in production!
         self.auto_reload = settings.get('auto_reload', False)
@@ -33,7 +33,7 @@ class Nest(object):
             from .reloader import Reloader
             self.reloader = Reloader.activate(app=self)
 
-        if self.async:
+        if self.asyncio:
             from .handlers.async import AsyncHandler
             self.handler = AsyncHandler(
                 nest=self, app=self.app, socket=self.sock)

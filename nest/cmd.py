@@ -13,7 +13,7 @@ def _parse():
     parser.add_argument('--host', default='127.0.0.1')
     parser.add_argument('--port', default=8000, type=int)
     parser.add_argument('--auto-reload', action='store_true')
-    parser.add_argument('--async', action='store_true')
+    parser.add_argument('--asyncio', action='store_true')
     parser.add_argument('--debug', action='store_true')
     return parser.parse_args()
 
