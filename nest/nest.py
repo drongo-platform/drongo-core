@@ -34,7 +34,7 @@ class Nest(object):
             self.reloader = Reloader.activate(app=self)
 
         if self.asyncio:
-            from .handlers.async import AsyncHandler
+            from .handlers.asynch import AsyncHandler
             self.handler = AsyncHandler(
                 nest=self, app=self.app, socket=self.sock)
         else:
