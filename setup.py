@@ -2,10 +2,9 @@
 
 from setuptools import find_packages, setup
 
-
 setup(
     name='drongo-core',
-    version='0.0.1',
+    version='1.0.0',
     description='A nano web-framework for python.',
     author='Sattvik Chakravarthy',
     author_email='sattvik@gmail.com',
